@@ -19,15 +19,22 @@ def show_result(result,query_num):
 
 request_1 = "What are the most popular three articles of all time?\n"
 
-query_1 = "Select title,count(*) as views from articles join log on articles.slug = substring(log.path,10) group by articles.title order by views desc limit 3;"
+query_1 = "Select title,count(*) as views from articles \
+           join log on articles.slug = substring(log.path,10) \
+           group by articles.title order by views desc limit 3;"
 
 request_2 = "Who are the most popular article authors of all time?\n"
 
-query_2 = "Select authors.name,count(log.path) as views from authors join articles on authors.id = articles.author join log on articles.slug = substring(log.path,10) group by authors.name order by views desc;"
+query_2 = "Select authors.name,count(log.path) as views from authors \
+           join articles on authors.id = articles.author \
+           join log on articles.slug = substring(log.path,10) \
+           group by authors.name order by views desc;"
 
 request_3 = "On which days did more than 1% of requests lead to errors?\n"
 
-query_3 = "select to_char(A.time,'Mon DD,YYYY'), round((A.requestfailed*100.00/B.requests),3) as errors from failedlog A join requestlog B on A.time=B.time where (A.requestfailed*100.00/B.requests)>1.00;"
+query_3 = "select to_char(A.time,'Mon DD,YYYY'), round((A.requestfailed*100.00/B.requests),3) \
+           as errors from failedlog A join requestlog B on A.time=B.time \
+           where (A.requestfailed*100.00/B.requests)>1.00;"
 
 print(request_1)
 result = get_result(query_1)
