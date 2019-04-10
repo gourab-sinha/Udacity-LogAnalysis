@@ -10,11 +10,10 @@ def get_result(query):
     return result
 
 def show_result(result,query_num):
-    if(query_num == 1 or query_num == 2):
-        for i in range (len(result)):
+    for i in range (len(result)):
+        if(query_num == 1 or query_num == 2):
             print('{0} - {1} views\n'.format(result[i][0],result[i][1]))
-    else:
-        for i in range (len(result)):
+        else:
             print('{0} - {1}% errors'.format(result[i][0],result[i][1]))
 
 request_1 = "What are the most popular three articles of all time?\n"
